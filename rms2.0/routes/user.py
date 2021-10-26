@@ -10,11 +10,13 @@ from schemas.index import Requests
 user = APIRouter()
 
 
+# this is get method of requests from request database by student_id
 @user.get("/get-request-by-student_id/{student_id}")
 async def read_data(student_id: int):
     return conn.execute(requests.select().where(requests.c.student_id == student_id)).fetchall()
 
 
+# this is post method of requests to log request in request database
 @user.post("/insert-requests")
 async def write_data(user: Requests):
     conn.execute(requests.insert().values(
@@ -26,16 +28,19 @@ async def write_data(user: Requests):
     ))
 
 
+# this is get method of student to get all data of students
 @user.get("/get-all-student-data")
 async def read_data_student():
     return conn.execute(student.select()).fetchall()
 
 
+# this is get method of student data from student database by student_id
 @user.get("/get-data-by-student_id/{student_id}")
 async def read_data(student_id: int):
     return conn.execute(student.select().where(student.c.student_id == student_id)).fetchall()
 
 
+# this is post method of student to insert data in student database
 @user.post("/insert-student-data")
 async def write_data(user: Student):
     conn.execute(student.insert().values(
@@ -50,6 +55,7 @@ async def write_data(user: Student):
     return conn.execute(student.select()).fetchall()
 
 
+# this is put method of student to update student data by student_id
 @user.put("/update-student-details/{student_id}")
 async def update_data(student_id: int, user: Student):
     conn.execute(student.update().
@@ -64,6 +70,7 @@ async def update_data(student_id: int, user: Student):
     return conn.execute(student.select()).fetchall
 
 
+# this is delete method of student to delete data of student by student_ID
 @user.delete("/delete-by-student_id/{student_id}")
 async def delete_data(student_id: int):
     conn.execute(student.delete().where(student.c.student_id == student_id))
