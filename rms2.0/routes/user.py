@@ -1,6 +1,4 @@
 from fastapi import APIRouter
-# import sys
-# sys.path.append('../../')
 from configs.dbs import conn
 from models.index import student
 from schemas.index import Student
