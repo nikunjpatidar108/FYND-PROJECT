@@ -40,6 +40,7 @@ async def write_data(user: Requests):
         status=user.status,
         date=user.date
     ))
+    return conn.execute(requests.select()).fetchall()
 
 
 # this is get method of student to get all data of students
