@@ -31,20 +31,20 @@ async def write_data(user: Requests):
     return conn.execute(requests.select()).fetchall()
 
 
-@user.put("/{student_id}")
-async def update_data(student_id: int, user: Requests):
+@user.put("/{Sr_No}")
+async def update_data(Sr_No: int, user: Requests):
     conn.execute(requests.update().
         values(
         category=user.category,
         description=user.description,
         status=user.status,
         date=user.date
-    ).where(requests.c.student_id == student_id))
+    ).where(requests.c.Sr_No == Sr_No))
 
     return conn.execute(requests.select()).fetchall
 
 
-@user.delete("/{student_id}")
-async def delete_data(student_id: int):
-    conn.execute(requests.delete().where(requests.c.student_id == student_id))
+@user.delete("/{Sr_No}")
+async def delete_data(Sr_No: int):
+    conn.execute(requests.delete().where(requests.c.Sr_No == Sr_No))
     return conn.execute(requests.select()).fetchall

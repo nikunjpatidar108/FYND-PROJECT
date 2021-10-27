@@ -17,13 +17,13 @@ async def read_data(student_id: int):
     return conn.execute(requests.select().where(requests.c.student_id == student_id)).fetchall()
 
 
-@user.put("/change-status-of-requests/{student_id}")
-async def update_data(student_id: int, user: Requests):
+@user.put("/change-status-of-requests/{Sr_No}")
+async def update_data(Sr_No: int, user: Requests):
     conn.execute(requests.update().
         values(
         status=user.status,
         date=user.date
-    ).where(requests.c.student_id == student_id))
+    ).where(requests.c.Sr_No == Sr_No))
 
     return conn.execute(requests.select()).fetchall()
 

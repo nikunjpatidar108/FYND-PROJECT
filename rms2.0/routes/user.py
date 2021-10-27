@@ -14,6 +14,22 @@ async def read_data(student_id: int):
     return conn.execute(requests.select().where(requests.c.student_id == student_id)).fetchall()
 
 
+@user.get("/get-log-request")
+async def read_data():
+    return conn.execute(requests.select()).fetchall()
+
+
+@user.put("/change-status-of-requests/{Sr_No}")
+async def update_data(Sr_No: int, user: Requests):
+    conn.execute(requests.update().
+        values(
+        status=user.status,
+        date=user.date
+    ).where(requests.c.Sr_No == Sr_No))
+
+    return conn.execute(requests.select()).fetchall()
+
+
 # this is post method of requests to log request in request database
 @user.post("/insert-requests")
 async def write_data(user: Requests):

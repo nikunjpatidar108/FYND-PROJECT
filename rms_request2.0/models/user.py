@@ -9,4 +9,5 @@ requests = Table(
     Column('description', String(500)),
     Column('status', String(255)),
     Column('date', Date),
+    Column('Sr_No', Integer, nullable=False, autoincrement=True, primary_key=True)
 )
